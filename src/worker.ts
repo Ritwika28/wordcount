@@ -1,7 +1,8 @@
 import { parentPort, workerData } from 'worker_threads';
 
+interface StringMap { [key: string]: number; }
 function wordMap(str: string) {
-            return getWordsByWordBoundaries(str).reduce(function(map: any, word: string) {
+            return getWordsByWordBoundaries(str).reduce(function(map: StringMap, word: string) {
                 map[word] = (map[word] || 0) + 1;
                 return map;
             }, {});
