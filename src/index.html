@@ -21,6 +21,8 @@
                     document.getElementById("wordFreq").innerHTML = `<table><thead><tr><th>Words</th><th>Count</th></tr></thead>${message.data}</table>`;
                 }
                 
+            }).catch((error) => {
+            console.log(error)
             });
         }
 
