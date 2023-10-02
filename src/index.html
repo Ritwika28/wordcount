@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><link rel="stylesheet" href="styles.css"></head>
+    <body>
+    <div id="wordFreq"></div>
+    <script>
+
+        const worker = new Worker('worker.js');
+
+        const baseUrl =  'http://localhost:3000/text';
+
+        async function getFileTxt(){
+            const res = await fetch(baseUrl)
+            .then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                let text = data.text;
+                worker.postMessage(text);
+                worker.onmessage = (message)=> {
+                    console.log(message);
+                    document.getElementById("wordFreq").innerHTML = `<table><thead><tr><th>Words</th><th>Count</th></tr></thead>${message.data}</table>`;
+                }
+                
+            });
+        }
+
+        getFileTxt();
+
+    </script>
+    </body>
+</html>
