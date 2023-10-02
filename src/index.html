@@ -17,7 +17,6 @@
                 let text = data.text;
                 worker.postMessage(text);
                 worker.onmessage = (message)=> {
-                    console.log(message);
                     document.getElementById("wordFreq").innerHTML = `<table><thead><tr><th>Words</th><th>Count</th></tr></thead>${message.data}</table>`;
                 }
                 
